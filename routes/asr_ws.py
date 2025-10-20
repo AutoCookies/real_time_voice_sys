@@ -9,7 +9,7 @@ import tempfile, os
 router = APIRouter()
 
 # Load Whisper model 1 lần khi server start
-model = whisper.load_model("small")  # tiny/base/small/medium/large
+model = whisper.load_model("base")  # tiny/base/small/medium/large
 
 @router.post("/audio_to_text/{room_id}/{client_id}")
 async def audio_to_text(
@@ -38,7 +38,8 @@ async def audio_to_text(
         print(f"[ASR] room={room_id}, client={client_id}, lang={lang}, text={text}")
 
         # Gửi text tới tất cả client trong room
-        await broadcast(room_id, client_id, text)
+        await broadcast(room_id, client_id, text, lang)
+
 
     except Exception as e:
         print("Transcribe error:", e)
