@@ -116,7 +116,7 @@ async def websocket_endpoint(websocket: WebSocket, room_id: str, client_id: str,
 # =====================================================
 async def broadcast(room_id: str, client_id: str, text: str, src_lang: str):
     if room_id not in rooms: return
-    print(f"\n🗣️  [{client_id}] ({src_lang}): {text}")
+    print(f"\n[{client_id}] ({src_lang}): {text}")
 
     # pivot to English
     pivot_en = await translate(text, src_lang, "en")
